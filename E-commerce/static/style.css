@@ -1,0 +1,144 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styles for header, hero section, footer, etc. */
+header {
+    background: #f0f0f0; /* Light grey background */
+    color: #333; /* Dark text color */
+    padding: 20px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    transition: transform 0.3s ease;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333; /* Dark text color */
+}
+
+.search-bar input {
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+}
+
+.search-bar button {
+    padding: 8px 15px;
+    background: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.hero {
+    text-align: center;
+    padding: 100px 0;
+    background: url('hero-bg.jpg') no-repeat center center/cover;
+    color: #fff;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+footer {
+    background: #333;
+    color: #fff;
+    padding: 40px;
+    
+    text-align: center;
+}
+
+.footer-links ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-links li {
+    margin-right: 20px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.social-links a {
+    margin-right: 10px;
+}
+
+
+.nav-links li:hover {
+    transform: scale(1.2);
+    transition: transform 0.3s ease; 
+}
+
+.logo:hover img {
+    transform: scale(1.2); 
+}
+
+.search-bar:hover input {
+    transform: scale(1.2); 
+}
+/* Additional CSS for categories layout */
+.categories ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: space-between; /* Distributes categories evenly */
+}
+
+.categories li {
+    width: 25%; 
+    height: 500px;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.categories a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+.categories ul li {
+    transition: transform 0.3s ease;
+    
+}
+
+.categories ul li:hover {
+    transform: scale(1.1);
+    
+}
+

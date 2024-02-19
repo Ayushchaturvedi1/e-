@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackss</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Additional CSS for product grid layout */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 20px;
+            padding: 20px;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .product h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .product p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .product .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .product .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Additional CSS for product grid layout */
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 products per row */
+            grid-gap: 20px;
+            padding: 20px;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .product img {
+            height: 70%; /* Set the height of the image to 100% of its container */
+            width: 100%; /* Set the width of the image to 100% of its container */
+            object-fit: cover; /* Cover the entire container with the image */
+            margin-bottom: 10px;
+        }
+
+        .product h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .product p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .product button {
+            display: block;
+            width: 100%;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .product button:hover {
+            background-color: #0056b3;
+        }
+        .dropbtn {
+            background-color: ;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        /* Dropdown container (hidden by default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        /* Change color of dropdown links on hover */
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        
+        /* Show the dropdown menu when the dropdown button is clicked */
+        .show {
+            display: block;
+        }
+            
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="{{ url_for('static', filename='photos/logo.jfif') }}" alt="Your Brand Logo" >
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="dropdown" id="categoryDropdown">
+                    <a href="#" class="dropbtn">Category</a>
+                    <div class="dropdown-content" id="categoryMenu">
+                        <a href="{{url_for('sports')}}">Sports</a>
+                        <a href="{{url_for('clothes')}}">Clothes</a>
+                        <a href="{{url_for('shoes')}}">Shoes</a>
+                        <a href="{{url_for('electronics')}}">Electronics</a>
+                    </div>
+                <li><a href="{{ url_for('view_cart') }}">Checkout</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search..." oninput="filterProducts()">
+                <button type="button" onclick="filterProducts()">Search</button>
+            </div>
+        </nav>
+    </header>
+
+    
+
+    <section class="categories" style="background-color: #FFFFFF;">
+        <h2 style="text-align: center; color: #333; font-size: 32px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px; text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);">Categories of Products</h2>
+        <ul>
+            <li >
+                <a href="/clothes">
+                <img src="{{ url_for('static', filename='photos/clothes.jpg') }}" alt="Clothes" style="height:400px; width:110%;">
+                </a>
+            </li>
+            <li>
+                <a href="/sports">
+                <img src="{{ url_for('static', filename='photos/sports.jpg') }}" alt="Sports" style="height:400px; width:110%;">
+                </a>
+            </li>
+            <li>
+                <a href="/electronics">
+                <img src="{{ url_for('static', filename='photos/electronics.jpg') }}" alt="Electronics"style="height:400px; width:110%;">
+                </a>
+            </li>
+            <li>
+                <a href="/shoes">
+                <img src="{{ url_for('static', filename='photos/shoes.jpg') }}" alt="Shoes" style="height:400px; width:120%;">
+                </a>
+            </li>
+        </ul>
+    </section>
+    <main>
+        <section class="product-list">
+            <div class="product">
+                <img src="http://surl.li/qnzva" alt="Product 11">
+                <h2>Baby Slippers</h2>
+                <p>$250</p>
+                <form action="/home" method="post">
+                    <input type="hidden" name="product_name" value="Baby Slippers">
+                    <input type="hidden" name="product_url" value="http://surl.li/qnzva">
+                    <input type="hidden" name="product_price" value="250"> <!-- Update the value to match the product name -->
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            <div class="product">
+                <img src="http://uwb75u.ttu.cc" alt="Product 2">
+                <h2>Black Tshirt</h2>
+                <p>$100</p>
+                <form action="/home" method="post">
+                    <input type="hidden" name="product_name" value="Black Tshirt">
+                    <input type="hidden" name="product_url" value="http://uwb75u.ttu.cc">
+                    <input type="hidden" name="product_price" value="100">
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            <div class="product">
+                <img src="http://surl.li/qnnng" alt="Product 5">
+                <h2>Cricket Bat</h2>
+                <p>$5000</p>
+                <form action="/home" method="post">
+                    <input type="hidden" name="product_name" value="Cricket Bat"> 
+                    <input type="hidden" name="product_url" value="http://surl.li/qnnng">
+                    <input type="hidden" name="product_price" value="5000"><!-- Update the value to match the product name -->
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            <div class="product">
+                <img src="http://surl.li/qnnox" alt="Product 6">
+                <h2>Cricket Ball</h2>
+                <p>$700</p>
+                <form action="/home" method="post">
+                    <input type="hidden" name="product_name" value="Cricket Ball">
+                    <input type="hidden" name="product_url" value="http://surl.li/qnnox">
+                    <input type="hidden" name="product_price" value="700"> <!-- Update the value to match the product name -->
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            <div class="product">
+                <img src="http://surl.li/qnykh" alt="Product 3">
+                <h2>Headphone</h2>
+                <p>$10000</p>
+                <form action="/home" method="post">
+                    <input type="hidden" name="product_name" value="Headphone">
+                    <input type="hidden" name="product_url" value="http://surl.li/qnykh">
+                    <input type="hidden" name="product_price" value="10000">
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            <div class="product">
+                <img src="http://surl.li/qnylj" alt="Product 4">
+                <h2>Apple Earbuds</h2>
+                <p>$30000</p>
+                <form action="/home" method="post">
+                    <input type="hidden" name="product_name" value="Apple Earbuds">
+                    <input type="hidden" name="product_url" value="http://surl.li/qnylj">
+                    <input type="hidden" name="product_price" value="30000"> 
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            <div class="product">
+                <img src="http://surl.li/qnzrc" alt="Product 7">
+                <h2>Womens sandal</h2>
+                <p>$5500</p>
+                <form action="/home" method="post">
+                    <input type="hidden" name="product_name" value="Womens sandal">
+                    <input type="hidden" name="product_url" value="http://surl.li/qnzrc">
+                    <input type="hidden" name="product_price" value="5500"><!-- Update the value to match the product name -->
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            <div class="product">
+                <img src="http://surl.li/qnymi" alt="Product 5">
+                <h2>Samsung Earphone</h2>
+                <p>$5000</p>
+                <form action="/home" method="post">
+                    <input type="hidden" name="product_name" value="Samsung Earphone"> 
+                    <input type="hidden" name="product_url" value="http://surl.li/qnymi">
+                    <input type="hidden" name="product_price" value="5000"><!-- Update the value to match the product name -->
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            <div class="product">
+                <img src="http://surl.li/qnnrg" alt="Product 7">
+                <h2>Cricket Stump</h2>
+                <p>$550</p>
+                <form action="/home" method="post">
+                    <input type="hidden" name="product_name" value="Cricket Stump">
+                    <input type="hidden" name="product_url" value="http://surl.li/qnnrg">
+                    <input type="hidden" name="product_price" value="550"><!-- Update the value to match the product name -->
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            <div class="product">
+                <img src="http://egv00h.ttu.cc" alt="Product 2">
+                <h2>White Tshirt</h2>
+                <p>$32</p>
+                <form action="/home" method="post">
+                    <input type="hidden" name="product_name" value="White Tshirt">
+                    <input type="hidden" name="product_url" value="http://egv00h.ttu.cc">
+                    <input type="hidden" name="product_price" value="32"> 
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            <div class="product">
+                <img src="http://surl.li/qnzvw" alt="Product 12">
+                <h2>Crocs</h2>
+                <p>$2800</p>
+                <form action="/home" method="post">
+                    <input type="hidden" name="product_name" value="Crocs">
+                    <input type="hidden" name="product_url" value="http://surl.li/qnzvw">
+                    <input type="hidden" name="product_price" value="2800"> <!-- Update the value to match the product name -->
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+        </section>
+    </main>       
+
+    
+    <footer class="bg-body-tertiary text-center">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+          <!-- Section: Social media -->
+          <section class="mb-4">
+            <!-- Facebook -->
+            <a
+            data-mdb-ripple-init
+              class="btn text-white btn-floating m-1"
+              style="background-color: #3b5998;"
+              href="#!"
+              role="button"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+      
+            <!-- Twitter -->
+            <a
+              data-mdb-ripple-init
+              class="btn text-white btn-floating m-1"
+              style="background-color: #55acee;"
+              href="#!"
+              role="button"
+              ><i class="fab fa-twitter"></i
+            ></a>
+      
+            <!-- Google -->
+            <a
+              data-mdb-ripple-init
+              class="btn text-white btn-floating m-1"
+              style="background-color: #dd4b39;"
+              href="#!"
+              role="button"
+              ><i class="fab fa-google"></i
+            ></a>
+      
+            <!-- Instagram -->
+            <a
+              data-mdb-ripple-init
+              class="btn text-white btn-floating m-1"
+              style="background-color: #ac2bac;"
+              href="#!"
+              role="button"
+              ><i class="fab fa-instagram"></i
+            ></a>
+      
+            <!-- Linkedin -->
+            <a
+              data-mdb-ripple-init
+              class="btn text-white btn-floating m-1"
+              style="background-color: #0082ca;"
+              href="#!"
+              role="button"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <!-- Github -->
+            <a
+              data-mdb-ripple-init
+              class="btn text-white btn-floating m-1"
+              style="background-color: #333333;"
+              href="#!"
+              role="button"
+              ><i class="fab fa-github"></i
+            ></a>
+          </section>
+          <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+      
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+          © 2020 Copyright:
+          <a class="text-body" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const categoryDropdown = document.getElementById('categoryDropdown');
+            const categoryMenu = document.getElementById('categoryMenu');
+        
+            // Toggle visibility of the dropdown menu when the Category button is clicked
+            categoryDropdown.addEventListener('click', () => {
+                categoryMenu.classList.toggle('show');
+            });
+        
+            // Close the dropdown menu when clicking outside of it
+            document.addEventListener('click', event => {
+                if (!categoryDropdown.contains(event.target)) {
+                    categoryMenu.classList.remove('show');
+                }
+            });
+        });
+
+        function filterProducts() {
+            const searchInput = document.getElementById('searchInput');
+            const searchTerm = searchInput.value.trim().toLowerCase();
+    
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                const productName = product.querySelector('h2').textContent.toLowerCase();
+                if (productName.startsWith(searchTerm)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+        
+      </script>
+</body>
+</html>
